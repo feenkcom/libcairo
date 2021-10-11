@@ -88,7 +88,7 @@ impl CairoLibrary {
                     .expect("Could not find freetype's pkgconfig"),
             )
             .env("CPPFLAGS", &cpp_flags)
-            //.env("LIBS", "-lbz2")
+            .env("LIBS", "-lbz2")
             .arg("--enable-ft=yes")
             .arg(format!(
                 "--prefix={}",
