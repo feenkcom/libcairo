@@ -478,7 +478,7 @@ dependencies = [
 [[package]]
 name = "libfreetype-library"
 version = "0.1.0"
-source = "git+https://github.com/feenkcom/libfreetype.git#531dffc3b34903db3dc61ef6647e6ed52b071be8"
+source = "git+https://github.com/feenkcom/libfreetype.git#af20d11ecdcfe3cf74d44b8fd26fcefdaa6a244e"
 dependencies = [
  "file-matcher",
  "shared-library-builder",

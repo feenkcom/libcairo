@@ -1,5 +1,5 @@
 use crate::pixman_library::PixmanLibrary;
-use libfreetype_library::{libfreetype, libpng, libzlib};
+use libfreetype_library::{libbzip2, libfreetype, libpng, libzlib};
 use shared_library_builder::{
     Library, LibraryCompilationContext, LibraryDependencies, LibraryLocation, LibraryOptions,
     TarArchive, TarUrlLocation,
@@ -35,6 +35,7 @@ impl CairoLibrary {
             ),
             release_location: None,
             dependencies: LibraryDependencies::new()
+                .push(libbzip2().into())
                 .push(PixmanLibrary::new().into())
                 .push(libfreetype(None as Option<String>).into()),
             options: LibraryOptions::default(),
@@ -85,7 +86,7 @@ impl CairoLibrary {
                     .expect("Could not find freetype's pkgconfig"),
             )
             .env("CPPFLAGS", &cpp_flags)
-            .env("LIBS", "-lbz2")
+            //.env("LIBS", "-lbz2")
             .arg("--enable-ft=yes")
             .arg(format!(
                 "--prefix={}",
@@ -112,7 +113,7 @@ impl CairoLibrary {
         command
             .current_dir(&makefile_dir)
             .env("CPPFLAGS", &cpp_flags)
-            .env("LIBS", "-lbz2")
+            //.env("LIBS", "-lbz2")
             .env(
                 "PKG_CONFIG_PATH",
                 std::env::join_paths(&pkg_config_paths).unwrap(),
