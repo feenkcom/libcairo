@@ -1,0 +1,14 @@
+[package]
+name = "libcairo-library"
+version = "0.1.0"
+edition = "2018"
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]
+shared-library-builder = { git = "https://github.com/feenkcom/shared-library-builder-rs", features = ["git-location", "tar-location"] }
+libfreetype-library = { git = "https://github.com/feenkcom/libfreetype.git" }
+which = "4.2"
+file-matcher = "0.6"
+user-error = "1.2"
