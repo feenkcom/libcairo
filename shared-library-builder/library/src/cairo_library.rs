@@ -1,5 +1,5 @@
 use crate::pixman_library::PixmanLibrary;
-use libfreetype_library::{libbzip2, libfreetype, libpng, libzlib};
+use libfreetype_library::{libfreetype, libpng, libzlib};
 use shared_library_builder::{
     Library, LibraryCompilationContext, LibraryDependencies, LibraryLocation, LibraryOptions,
     TarArchive, TarUrlLocation,
@@ -35,7 +35,6 @@ impl CairoLibrary {
             ),
             release_location: None,
             dependencies: LibraryDependencies::new()
-                .push(libbzip2().into())
                 .push(PixmanLibrary::new().into())
                 .push(libfreetype(None as Option<String>).into()),
             options: LibraryOptions::default(),
@@ -67,10 +66,13 @@ impl CairoLibrary {
 
         let mut cpp_flags = std::env::var("CPPFLAGS").unwrap_or_else(|_| "".to_owned());
         cpp_flags = format!(
-            "{} {}",
+            "{} {} {}",
             cpp_flags,
-            self.dependencies.include_headers_flags(context)
+            self.dependencies.include_headers_flags(context),
+            self.dependencies.linker_libraries_flags(context)
         );
+
+        println!("cpp_flags = {}", &cpp_flags);
 
         let mut command = Command::new(self.source_directory(context).join("configure"));
         command
@@ -113,7 +115,7 @@ impl CairoLibrary {
         command
             .current_dir(&makefile_dir)
             .env("CPPFLAGS", &cpp_flags)
-            //.env("LIBS", "-lbz2")
+            .env("LIBS", "-lbz2")
             .env(
                 "PKG_CONFIG_PATH",
                 std::env::join_paths(&pkg_config_paths).unwrap(),
