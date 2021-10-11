@@ -88,7 +88,7 @@ impl CairoLibrary {
                     .expect("Could not find freetype's pkgconfig"),
             )
             .env("CPPFLAGS", &cpp_flags)
-            .env("LIBS", "-lbz2")
+            .env("LIBS", "-l:libbz2_static.a")
             .arg("--enable-ft=yes")
             .arg(format!(
                 "--prefix={}",
@@ -115,7 +115,7 @@ impl CairoLibrary {
         command
             .current_dir(&makefile_dir)
             .env("CPPFLAGS", &cpp_flags)
-            .env("LIBS", "-lbz2")
+            .env("LIBS", "-l:libbz2_static.a")
             .env(
                 "PKG_CONFIG_PATH",
                 std::env::join_paths(&pkg_config_paths).unwrap(),
