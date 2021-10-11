@@ -55,6 +55,7 @@ pipeline {
                     }
 
                     steps {
+                        sh 'if [ -d target ]; then rm -Rf target; fi'
                         sh 'git clean -fdx'
                         sh "cargo run --package ${REPOSITORY_NAME}-builder --bin builder --release"
 
@@ -75,6 +76,7 @@ pipeline {
                     }
 
                     steps {
+                        sh 'if [ -d target ]; then rm -Rf target; fi'
                         sh 'git clean -fdx'
                         sh "cargo run --package ${REPOSITORY_NAME}-builder --bin builder --release"
 
@@ -95,6 +97,7 @@ pipeline {
                     }
 
                     steps {
+                        sh 'if [ -d target ]; then rm -Rf target; fi'
                         sh 'git clean -fdx'
                         sh "cargo run --package ${REPOSITORY_NAME}-builder --bin builder --release"
 

@@ -74,6 +74,14 @@ impl CairoLibrary {
 
         println!("cpp_flags = {}", &cpp_flags);
 
+        let libbz2_link = if context.target().is_linux() {
+            "-l:libbz2_static.a"
+        } else if context.target().is_mac() {
+            "-lbz2"
+        } else {
+            ""
+        };
+
         let mut command = Command::new(self.source_directory(context).join("configure"));
         command
             .current_dir(&out_dir)
@@ -88,7 +96,7 @@ impl CairoLibrary {
                     .expect("Could not find freetype's pkgconfig"),
             )
             .env("CPPFLAGS", &cpp_flags)
-            .env("LIBS", "-l:libbz2_static.a")
+            .env("LIBS", libbz2_link)
             .arg("--enable-ft=yes")
             .arg(format!(
                 "--prefix={}",
@@ -115,7 +123,7 @@ impl CairoLibrary {
         command
             .current_dir(&makefile_dir)
             .env("CPPFLAGS", &cpp_flags)
-            .env("LIBS", "-l:libbz2_static.a")
+            .env("LIBS", libbz2_link)
             .env(
                 "PKG_CONFIG_PATH",
                 std::env::join_paths(&pkg_config_paths).unwrap(),
