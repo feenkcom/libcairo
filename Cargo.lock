@@ -478,7 +478,7 @@ dependencies = [
 [[package]]
 name = "libfreetype-library"
 version = "0.1.0"
-source = "git+https://github.com/feenkcom/libfreetype.git#af20d11ecdcfe3cf74d44b8fd26fcefdaa6a244e"
+source = "git+https://github.com/feenkcom/libfreetype.git#81f45beb719f1ffc0df8ec68a58df2149b779a18"
 dependencies = [
  "file-matcher",
  "shared-library-builder",
@@ -896,7 +896,7 @@ dependencies = [
 [[package]]
 name = "shared-library-builder"
 version = "0.2.0"
-source = "git+https://github.com/feenkcom/shared-library-builder-rs#d30fc96670e7ddf92d5947990c54473faf93640e"
+source = "git+https://github.com/feenkcom/shared-library-builder-rs#4324bb5ff8a43c41eee82b91c677ac05e5bddc04"
 dependencies = [
  "cmake",
  "downloader",

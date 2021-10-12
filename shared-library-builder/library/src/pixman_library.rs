@@ -118,7 +118,18 @@ impl PixmanLibrary {
                 "--exec-prefix={}",
                 self.native_library_prefix(options).display()
             ))
-            .arg("--disable-gtk");
+            .arg("--disable-gtk")
+            .arg(format!("--enable-shared={}", self.is_shared()));
+
+        if self.is_static() {
+            let mut cpp_flags = std::env::var("CPPFLAGS").unwrap_or_else(|_| "".to_owned());
+            cpp_flags = format!(
+                "{} -fPIC",
+                cpp_flags,
+            );
+
+            command.env("CPPFLAGS", &cpp_flags);
+        }
 
         println!("{:?}", &command);
 
@@ -136,6 +147,7 @@ impl PixmanLibrary {
         if !make.success() {
             panic!("Could not compile {}", self.name());
         }
+
         Ok(())
     }
 
