@@ -91,7 +91,7 @@ impl CairoLibrary {
                     .expect("Could not find freetype's pkgconfig"),
             )
             .env("CPPFLAGS", &cpp_flags)
-            .env("LDFLAGS", &linker_flags))
+            .env("LDFLAGS", &linker_flags)
             .arg("--enable-ft=yes")
             .arg(format!(
                 "--prefix={}",
