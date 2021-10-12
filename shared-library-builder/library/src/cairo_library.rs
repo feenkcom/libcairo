@@ -92,8 +92,8 @@ impl CairoLibrary {
             )
             .env("CPPFLAGS", &cpp_flags)
             .env("LDFLAGS", &linker_flags)
-            .arg(format!("--enable-shared={}", self.is_shared()))
-            .arg(format!("--enable-static={}", self.is_static()))
+            //.arg(format!("--enable-shared={}", self.is_shared()))
+            //.arg(format!("--enable-static={}", self.is_static()))
             .arg("--enable-ft=yes")
             .arg(format!(
                 "--prefix={}",
