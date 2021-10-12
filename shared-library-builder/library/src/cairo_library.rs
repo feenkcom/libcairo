@@ -117,7 +117,19 @@ impl CairoLibrary {
         let mut command = Command::new("make");
         command
             .current_dir(&makefile_dir)
-            .arg("install");
+            .arg("install")
+            .env(
+                "PKG_CONFIG_PATH",
+                std::env::join_paths(&pkg_config_paths).unwrap(),
+            )
+            .env(
+                "FREETYPE_CONFIG",
+                freetype
+                    .pkg_config_directory(context)
+                    .expect("Could not find freetype's pkgconfig"),
+            )
+            .env("CPPFLAGS", &cpp_flags)
+            .env("LDFLAGS", &linker_flags);
 
         println!("{:?}", &command);
 
