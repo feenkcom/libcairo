@@ -118,8 +118,6 @@ impl PixmanLibrary {
                 "--exec-prefix={}",
                 self.native_library_prefix(options).display()
             ))
-            .arg(format!("--enable-shared={}", self.is_shared()))
-            .arg(format!("--enable-static={}", self.is_static()))
             .arg("--disable-gtk");
 
         println!("{:?}", &command);
