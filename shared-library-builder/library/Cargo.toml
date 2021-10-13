@@ -10,5 +10,7 @@ path = "src/lib.rs"
 shared-library-builder = { git = "https://github.com/feenkcom/shared-library-builder-rs", features = ["git-location", "tar-location"] }
 libfreetype-library = { git = "https://github.com/feenkcom/libfreetype.git" }
 which = "4.2"
-file-matcher = "0.6"
+file-matcher = "0.7"
 user-error = "1.2"
+serde = { version = "1.0", features = [ "derive" ] }
+typetag = "0.1"

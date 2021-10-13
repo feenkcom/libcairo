@@ -8,8 +8,9 @@ use std::io::Write;
 use std::path::{Path, PathBuf};
 use std::process::Command;
 use user_error::UserFacingError;
+use serde::{Serialize, Deserialize};
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PixmanLibrary {
     location: LibraryLocation,
     options: LibraryOptions,
@@ -180,6 +181,7 @@ impl PixmanLibrary {
     }
 }
 
+#[typetag::serde]
 impl Library for PixmanLibrary {
     fn location(&self) -> &LibraryLocation {
         &self.location

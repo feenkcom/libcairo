@@ -4,6 +4,8 @@ use shared_library_builder::{
     Library, LibraryCompilationContext, LibraryDependencies, LibraryLocation, LibraryOptions,
     TarArchive, TarUrlLocation,
 };
+use serde::{Serialize, Deserialize};
+
 use std::error::Error;
 use std::fs::{read_to_string, OpenOptions};
 use std::io::Write;
@@ -11,7 +13,7 @@ use std::path::{Path, PathBuf};
 use std::process::Command;
 use user_error::UserFacingError;
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CairoLibrary {
     source_location: LibraryLocation,
     release_location: Option<LibraryLocation>,
@@ -360,6 +362,7 @@ impl CairoLibrary {
     }
 }
 
+#[typetag::serde]
 impl Library for CairoLibrary {
     fn location(&self) -> &LibraryLocation {
         &self.source_location
