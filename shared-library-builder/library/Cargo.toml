@@ -13,4 +13,4 @@ which = "4.2"
 file-matcher = "0.7"
 user-error = "1.2"
 serde = { version = "1.0", features = [ "derive" ] }
-typetag = "0.1"
+typetag = "0.2"
